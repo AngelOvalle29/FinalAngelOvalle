@@ -32,8 +32,10 @@
         <label for="Ram">Numero de Ejemplar</label>
         <InputText id="Ram" @bind-Value="computadora.Ram" class="form-control" />
     </div>
+
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Guardar Datos</button>
+       
     </div>
 </EditForm>
 
@@ -77,17 +79,18 @@
         </tbody>
     </table>
 }
+<p role="status">Productos Ingresados: @currentCount</p>
 
 @code {
     private Computadoras computadora = new Computadoras();
     List<Computadoras> computadoras = new List<Computadoras>();
-
+    private int currentCount = 0;
     protected async Task Guardar()
     {
         computadoras.Add(computadora);
 
         await localStorage.SetItemAsync("computadoras", computadoras);
-
+        currentCount++;
     }
 
     protected override async Task OnInitializedAsync()
